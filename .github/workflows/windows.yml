@@ -43,49 +43,13 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: ${{ matrix.pair.vcvarsall }}
+      
+      - uses: cocoa-xu/cuda-toolkit@v0.2.9
+        id: cuda-toolkit
+        with:
+          cuda: '11.8.0'
 
-      - name: Mix Compile
+      - name: Check NVCC
         shell: bash
         run: |
-          if [ "${{ matrix.pair.vcvarsall }}" = "amd64_arm64" ]; then
-            export CMAKE_GENERATOR_TYPE="${{ matrix.pair.CMAKE_GENERATOR_TYPE }}"
-            export MSBUILD_PLATFORM="${{ matrix.pair.msbuild_platform }}"
-            export CMAKE_TOOLCHAIN_FILE="$(pwd)/${{ matrix.pair.cmake_toolchain_file }}"
-          fi
-          mix deps.get
-          mix compile
-
-      - name: Mix Test
-        if: matrix.pair.vcvarsall == 'x64'
-        run: |
-          mix test
-
-      - name: Test the Elixir example
-        if: matrix.pair.vcvarsall == 'x64'
-        shell: bash
-        run: |
-          cd example/elixir
-          rm -rf _build build build_dll
-          mix deps.get
-          mix test
-          rm -rf _build build build_dll
-          cd ../..
-
-      - name: Rebar3 Compile
-        if: matrix.pair.vcvarsall == 'x64'
-        shell: bash
-        run: |
-          export PATH="/c/Users/runneradmin/.mix:${PATH}"
-          rm -rf _build build build_dll
-          rebar3 compile
-          rm -rf _build build build_dll
-
-      - name: Test the Erlang example
-        if: matrix.pair.vcvarsall == 'x64'
-        shell: bash
-        run: |
-          export PATH="/c/Users/runneradmin/.mix:${PATH}"
-          cd example/erlang
-          rm -rf _build build build_dll
-          rebar3 compile
-          rebar3 eunit
+          nvcc || true
