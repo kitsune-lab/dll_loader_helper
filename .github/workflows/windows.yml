@@ -48,3 +48,5 @@ jobs:
         shell: bash
         run: |
           nvcc || true
+          echo $CUDA_PATH
+          echo `which nvcc`
