@@ -43,10 +43,17 @@ jobs:
         id: cuda-toolkit
         with:
           cuda: '11.8.0'
+          cudnn: '8.7.0'
 
       - name: Check NVCC
         shell: bash
         run: |
-          nvcc || true
-          echo $CUDA_PATH
-          echo `which nvcc`
+          ls -la $CUDA_PATH
+          ls -la "$CUDA_PATH\\bin" || true
+          ls -la "$CUDA_PATH/bin" || true
+          
+          ls -la "$CUDA_PATH\\lib\\x64" || true
+          ls -la "$CUDA_PATH/lib/x64" || true
+          
+          ls -la "$CUDA_PATH\\include" || true
+          ls -la "$CUDA_PATH/include" || true
