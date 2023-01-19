@@ -48,4 +48,3 @@ jobs:
           ls -la "$CUDA_PATH\\include" || true
           ls -la "$CUDA_PATH/include" || true
           
-          echo "pure pain peko"
