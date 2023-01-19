@@ -33,6 +33,7 @@ jobs:
         id: cuda-toolkit
         with:
           cuda: '11.8.0'
+          cudnn: '8.7.0+uwu'
           cudnn_url: ${{ secrets.CUDNN_870_WIN_URL }}
 
       - name: Check NVCC
