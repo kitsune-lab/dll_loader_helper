@@ -39,7 +39,8 @@ jobs:
       - name: Check NVCC
         shell: bash
         run: |
-          ls -la $CUDA_PATH
+          ls -lah $CUDNN_PATH || true
+          ls -lah $CUDA_PATH
           ls -la "$CUDA_PATH\\bin" || true
           ls -la "$CUDA_PATH/bin" || true
           
