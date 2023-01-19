@@ -28,10 +28,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: ${{ matrix.pair.vcvarsall }}
       
       - uses: cocoa-xu/cuda-toolkit@v0.3.0
         id: cuda-toolkit
