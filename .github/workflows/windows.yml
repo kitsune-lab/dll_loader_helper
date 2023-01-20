@@ -38,10 +38,7 @@ jobs:
 
       - name: Check NVCC
         shell: bash
-        run: |
-          echo "====== CUDNN_PATH ======"
-          ls -lah "$CUDNN_PATH" || true
-          
+        run: |          
           echo "====== $CUDA_PATH ======"
           ls -lah "$CUDA_PATH" || true
           
